@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">EcoZym</string>
+    
+    <!-- Authentication -->
+    <string name="welcome_text">Welcome Back</string>
+    <string name="email_address">Email Address</string>
+    <string name="your_email">Your email</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="log_in">Log In</string>
+    <string name="dont_have_account">Don\'t have an account? </string>
+    <string name="sign_up">Sign up</string>
+    <string name="back_button">Back</string>
+    <string name="toggle_password_visibility">Toggle password visibility</string>
+    
+    <!-- Waste Types -->
+    <string name="biopeel">BioPeel</string>
+    <string name="citruscycle">CitrusCycle</string>
+    <string name="fermafruit">FermaFruit</string>
+    
+    <!-- Progress Status -->
+    <string name="scheduled">Scheduled</string>
+    <string name="in_transit">In Transit</string>
+    <string name="processing">Processing</string>
+    <string name="returning">Returning</string>
+    <string name="delivered">Delivered</string>
+    
+    <!-- Production Stages -->
+    <string name="material_collection">Material Collection</string>
+    <string name="fermentation">Fermentation</string>
+    <string name="filtration">Filtration</string>
+    <string name="purification">Purification</string>
+    <string name="ready_for_return">Ready for Return</string>
+    
+    <!-- Admin Roles -->
+    <string name="super_admin">Super Admin</string>
+    <string name="progress_admin">Progress Admin</string>
+    <string name="production_admin">Production Admin</string>
+    
+    <!-- Company Status -->
+    <string name="pending">Pending</string>
+    <string name="approved">Approved</string>
+    <string name="rejected">Rejected</string>
+    
+    <!-- Common -->
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
+    <string name="success">Success</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="view">View</string>
+    <string name="confirm">Confirm</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    
+    <!-- Permissions -->
+    <string name="location_permission_required">Location permission is required to use current location</string>
+    <string name="camera_permission_required">Camera permission is required to take photos</string>
+    <string name="storage_permission_required">Storage permission is required to access files</string>
+    
+    <!-- Error Messages -->
+    <string name="network_error">Network error. Please check your internet connection.</string>
+    <string name="server_error">Server error. Please try again later.</string>
+    <string name="validation_error">Please check your input and try again.</string>
+    <string name="permission_denied">Permission denied</string>
+    
+    <!-- Maps API Key (Replace with actual key) -->
+    <string name="google_maps_key">YOUR_GOOGLE_MAPS_API_KEY</string>
+    <string name="default_notification_channel_id" />
+</resources>

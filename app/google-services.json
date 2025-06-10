@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "190448269113",
+    "project_id": "ecozym-896a9",
+    "storage_bucket": "ecozym-896a9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190448269113:android:b877795da9b6b343229ae8",
+        "android_client_info": {
+          "package_name": "com.ecozym.wastemanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWtZriIslUCIE4dWV1EWu0zx5DQ0iO1g4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

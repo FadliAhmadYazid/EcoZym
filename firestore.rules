@@ -1,0 +1,130 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users collection - DIPERBAIKI untuk mendukung super_admin
+    match /users/{userId} {
+      // Allow user to read/write their own data
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // Allow admins and super_admins to read all users
+      allow read: if request.auth != null && (isAdmin() || isSuperAdmin());
+
+      // Allow admins and super_admins to update user status (approve/reject)
+      allow update: if request.auth != null && (isAdmin() || isSuperAdmin()) &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']);
+
+      // Allow querying users by role and status for admin functions
+      allow list: if request.auth != null && (isAdmin() || isSuperAdmin());
+
+      // Allow creating new users during registration
+      allow create: if request.auth != null;
+
+      // Allow deleting users for super_admin
+      allow delete: if request.auth != null && isSuperAdmin();
+    }
+
+    // Waste registrations collection
+    match /waste_registrations/{registrationId} {
+      allow read, write: if request.auth != null &&
+        (resource.data.companyId == request.auth.uid || isAdmin() || isSuperAdmin());
+      allow create: if request.auth != null &&
+        request.resource.data.companyId == request.auth.uid;
+      allow list: if request.auth != null && (isAdmin() || isSuperAdmin());
+    }
+
+    // Progress tracking collection - DITAMBAHKAN untuk mengatasi error
+    match /progress/{progressId} {
+      allow read: if request.auth != null &&
+        (resource.data.companyId == request.auth.uid || isAdmin() || isSuperAdmin());
+      allow write: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow list: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow create: if request.auth != null && (isAdmin() || isSuperAdmin());
+    }
+
+    // Alternative progress tracking collection name
+    match /progress_tracking/{trackingId} {
+      allow read: if request.auth != null &&
+        (resource.data.companyId == request.auth.uid || isAdmin() || isSuperAdmin());
+      allow write: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow list: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow create: if request.auth != null && (isAdmin() || isSuperAdmin());
+    }
+
+    // Production collection
+    match /production/{productionId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow list: if request.auth != null && (isAdmin() || isSuperAdmin());
+    }
+
+    // Notifications collection
+    match /notifications/{notificationId} {
+      allow read, write: if request.auth != null &&
+        (resource.data.userId == request.auth.uid || isAdmin() || isSuperAdmin());
+      allow create: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow list: if request.auth != null &&
+        (resource.data.userId == request.auth.uid || isAdmin() || isSuperAdmin());
+    }
+
+    // Reports collection
+    match /reports/{reportId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow list: if request.auth != null;
+    }
+
+    // Dashboard stats collection
+    match /dashboard_stats/{statsId} {
+      allow read: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow write: if request.auth != null && (isAdmin() || isSuperAdmin());
+    }
+
+    // Companies collection - DITAMBAHKAN untuk mengatasi error
+    match /companies/{companyId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow list: if request.auth != null && (isAdmin() || isSuperAdmin());
+      allow create: if request.auth != null && (isAdmin() || isSuperAdmin());
+    }
+
+    // Admins collection - DITAMBAHKAN
+    match /admins/{adminId} {
+      allow read: if request.auth != null &&
+        (request.auth.uid == adminId || isSuperAdmin());
+      allow write: if request.auth != null && isSuperAdmin();
+      allow list: if request.auth != null && isSuperAdmin();
+    }
+
+    // PERBAIKAN Helper functions - mendukung super_admin dengan benar
+    function isAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'super_admin');
+    }
+
+    function isSuperAdmin() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'super_admin';
+    }
+
+    function isCompany() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'company';
+    }
+
+    function isDriver() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'driver';
+    }
+
+    // Explicitly deny wildcard reads for security
+    match /{document=**} {
+      allow read: if false;
+    }
+  }
+}

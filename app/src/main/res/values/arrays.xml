@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="industry_types">
+        <item>Food Processing</item>
+        <item>Fruit Processing</item>
+        <item>Vegetable Processing</item>
+        <item>Beverage Production</item>
+        <item>Restaurant</item>
+        <item>Hotel</item>
+        <item>Catering</item>
+        <item>Grocery Store</item>
+        <item>Supermarket</item>
+        <item>Other</item>
+    </string-array>
+    
+    <string-array name="waste_types">
+        <item>BioPeel</item>
+        <item>CitrusCycle</item>
+        <item>FermaFruit</item>
+    </string-array>
+    
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+    
+    <string-array name="admin_roles">
+        <item>Super Admin</item>
+        <item>Progress Admin</item>
+        <item>Production Admin</item>
+    </string-array>
+    
+    <string-array name="partner_types">
+        <item>Company</item>
+        <item>Admin</item>
+        <item>Driver</item>
+    </string-array>
+</resources>
